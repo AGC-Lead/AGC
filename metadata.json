@@ -1,0 +1,6 @@
+{
+  "name": "AGC Performance Agency",
+  "description": "Website premium da AGC - A única agência 360° focada em performance de vendas. Transformamos tráfego, conteúdo e vendas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
