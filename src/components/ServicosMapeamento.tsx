@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Video, BarChart2, MessageSquare, TrendingUp, Cpu, Smartphone, DollarSign, Calendar, Compass, ShieldCheck, ChevronDown } from 'lucide-react';
 
 export default function ServicosMapeamento() {
-  const [activeVideoCategory, setActiveVideoCategory] = useState<'realestate' | 'car' | 'const' | 'motos' | 'school'>('realestate');
+  const [activeVideoCategory, setActiveVideoCategory] = useState<'realestate' | 'car' | 'const' | 'motos' | 'school' | 'medica'>('realestate');
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
 
   const cronogramaData = [
@@ -47,6 +47,12 @@ export default function ServicosMapeamento() {
       stats: 'Visualizações: 33.4k • Leads: 29',
       desc: 'Tutorial rápido eliminando o receio da baliza e promovendo carteira ágil.',
       image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=400'
+    },
+    medica: {
+      title: 'Médica',
+      stats: 'Visualizações: 28.7k - Agendamentos: 21',
+      desc: 'Rotina profissional, bastidores e autoridade clínica apresentados com linguagem humanizada.',
+      image: 'https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&q=80&w=400'
     }
   };
 

@@ -29,6 +29,7 @@ export default function ContatoFinal() {
       concessionaria: 'Concessionária',
       'loja-moto': 'Loja de Moto',
       autoescola: 'Autoescola',
+      medica: 'Médica',
       outro: 'Outro segmento'
     };
     const readableSegment = segmentsMap[formData.segmento] || formData.segmento;
@@ -223,6 +224,7 @@ export default function ContatoFinal() {
                       <option value="concessionaria" className="bg-slate-900 text-white">Concessionária</option>
                       <option value="loja-moto" className="bg-slate-900 text-white">Loja de Moto</option>
                       <option value="autoescola" className="bg-slate-900 text-white">Autoescola</option>
+                      <option value="medica" className="bg-slate-900 text-white">Médica</option>
                       <option value="outro" className="bg-slate-900 text-white">Outro segmento</option>
                     </select>
                   </div>

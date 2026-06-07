@@ -1,24 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { AGC_SEGMENTS } from '../constants/data';
 
 export default function AreasCarrossel() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [videoAspectRatio, setVideoAspectRatio] = useState(16 / 9);
   const autoref = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Standard 6 second transition logic for premium feeling
-    if (!hasUserInteracted) {
-      autoref.current = setInterval(() => {
-        handleNext();
-      }, 5000);
-    }
+    const activeSegment = AGC_SEGMENTS[activeIndex];
+    autoref.current = setTimeout(() => {
+      handleNext();
+    }, activeSegment.durationMs);
+
     return () => {
-      if (autoref.current) clearInterval(autoref.current);
+      if (autoref.current) clearTimeout(autoref.current);
     };
-  }, [activeIndex, hasUserInteracted]);
+  }, [activeIndex]);
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev === AGC_SEGMENTS.length - 1 ? 0 : prev + 1));
@@ -29,7 +28,6 @@ export default function AreasCarrossel() {
   };
 
   const handleSelect = (idx: number) => {
-    setHasUserInteracted(true);
     setActiveIndex(idx);
   };
 
@@ -61,14 +59,14 @@ export default function AreasCarrossel() {
           {/* Carousel controls */}
           <div className="flex items-center space-x-3">
             <button
-              onClick={() => { setHasUserInteracted(true); handlePrev(); }}
+              onClick={handlePrev}
               className="p-3 rounded-full border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all active:scale-90"
               aria-label="Anterior"
             >
               <ChevronLeft className="w-5 h-5 text-white" />
             </button>
             <button
-              onClick={() => { setHasUserInteracted(true); handleNext(); }}
+              onClick={handleNext}
               className="p-3 rounded-full border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all active:scale-90"
               aria-label="Próximo"
             >
@@ -84,7 +82,7 @@ export default function AreasCarrossel() {
           <div className="lg:col-span-5 flex flex-col justify-between bg-white/5 rounded-3xl p-8 sm:p-10 border border-white/10 backdrop-blur-sm">
             <div className="space-y-6">
               <span className="font-mono text-slate-505 text-sm tracking-widest text-red-400 font-bold block uppercase">
-                CASO PRÁTICO – {activeIndex + 1} / {AGC_SEGMENTS.length}
+                {activeSegment.code} - CASO PRATICO {activeIndex + 1} / {AGC_SEGMENTS.length}
               </span>
 
               <AnimatePresence mode="wait">
@@ -130,7 +128,10 @@ export default function AreasCarrossel() {
           </div>
 
           {/* Right panel: High Quality HTML5 Video Container */}
-          <div className="lg:col-span-7 relative h-[320px] sm:h-[480px] rounded-3xl overflow-hidden border border-white/10 group bg-slate-950">
+          <div
+            className="lg:col-span-7 relative w-full rounded-3xl overflow-hidden border border-white/10 group bg-slate-950 self-center"
+            style={{ aspectRatio: videoAspectRatio }}
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSegment.id}
@@ -140,39 +141,40 @@ export default function AreasCarrossel() {
                 transition={{ duration: 0.6 }}
                 className="absolute inset-0 w-full h-full"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-brand-dark/20 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/65 via-transparent to-brand-dark/10 z-10 pointer-events-none" />
 
                 {/* Video tag with standard auto play configuration */}
                 <video
                   key={`${activeSegment.id}-video`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   autoPlay
                   loop
                   muted
                   playsInline
                   controls={false}
                   disablePictureInPicture
+                  onLoadedMetadata={(event) => {
+                    const video = event.currentTarget;
+                    if (video.videoWidth && video.videoHeight) {
+                      setVideoAspectRatio(video.videoWidth / video.videoHeight);
+                    }
+                  }}
                   onError={(e) => {
                     // Fallback directly on error
                     console.log('Video error, showing fallback image', e);
                   }}
                 >
-                  <source src={activeSegment.videoUrl} type="video/mp4" />
+                  <source src={activeSegment.videoUrl} type={activeSegment.videoType} />
                   Your browser does not support the video tag.
                 </video>
 
-                {/* Video loader overlay indicator */}
-                <div className="absolute bottom-5 right-5 z-20 flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-                  <Play className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
-                  <span className="font-mono text-[9px] tracking-wider text-slate-300 uppercase">LOOP ATIVO • MUTED</span>
-                </div>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
 
         {/* Small scannable quick selection selector menu */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {AGC_SEGMENTS.map((seg, idx) => (
             <button
               key={`${seg.id}-btn`}
@@ -183,7 +185,7 @@ export default function AreasCarrossel() {
                   : 'bg-white/5 border-white/10 text-slate-300 hover:border-white/30 hover:bg-white/10'
               }`}
             >
-              <span className="font-mono text-[10px] block text-white/50 mb-1">0{idx + 1}</span>
+              <span className="font-mono text-[10px] block text-white/50 mb-1">{seg.code}</span>
               <span className="font-display font-medium text-sm block tracking-tight">{seg.title}</span>
             </button>
           ))}
@@ -193,3 +195,4 @@ export default function AreasCarrossel() {
     </section>
   );
 }
+
