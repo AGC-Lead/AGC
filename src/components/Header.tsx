@@ -1,6 +1,7 @@
 import { useState, useEffect, MouseEvent } from 'react';
 import { Menu, X, MessageSquare, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { BRAND_LOGO_URL, BRAND_NAME } from '../constants/branding';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +41,36 @@ export default function Header() {
     }
   };
 
+  const logoMarkup = (
+    BRAND_LOGO_URL ? (
+      <img src={BRAND_LOGO_URL} alt={BRAND_NAME} className="h-8 w-auto object-contain" />
+    ) : (
+      <>
+        <span className={`text-2xl font-display font-extrabold tracking-widest ${
+          isScrolled ? 'text-slate-900' : 'text-white'
+        }`}>
+          {BRAND_NAME}
+        </span>
+        <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse font-sans">.</span>
+      </>
+    )
+  );
+
+  const desktopLogoMarkup = (
+    BRAND_LOGO_URL ? (
+      <img src={BRAND_LOGO_URL} alt={BRAND_NAME} className="h-8 w-auto object-contain" />
+    ) : (
+      <>
+        <span className={`text-xl xl:text-2xl font-display font-extrabold tracking-widest ${
+          isScrolled ? 'text-slate-900' : 'text-white'
+        }`}>
+          {BRAND_NAME}
+        </span>
+        <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+      </>
+    )
+  );
+
   return (
     <>
       <header
@@ -76,12 +107,7 @@ export default function Header() {
                 }}
                 className="flex items-center space-x-1"
               >
-                <span className={`text-2xl font-display font-extrabold tracking-widest ${
-                  isScrolled ? 'text-slate-900' : 'text-white'
-                }`}>
-                  AGC
-                </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse font-sans">.</span>
+                {logoMarkup}
               </a>
             </div>
 
@@ -113,12 +139,7 @@ export default function Header() {
                 }}
                 className="flex items-center space-x-1"
               >
-                <span className={`text-xl xl:text-2xl font-display font-extrabold tracking-widest ${
-                  isScrolled ? 'text-slate-900' : 'text-white'
-                }`}>
-                  AGC
-                </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                {desktopLogoMarkup}
               </a>
             </div>
 

@@ -6,9 +6,11 @@ import { AGC_SEGMENTS } from '../constants/data';
 export default function AreasCarrossel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [videoAspectRatio, setVideoAspectRatio] = useState(16 / 9);
+  const [videoFailed, setVideoFailed] = useState(false);
   const autoref = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    setVideoFailed(false);
     const activeSegment = AGC_SEGMENTS[activeIndex];
     autoref.current = setTimeout(() => {
       handleNext();
@@ -143,30 +145,37 @@ export default function AreasCarrossel() {
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/65 via-transparent to-brand-dark/10 z-10 pointer-events-none" />
 
-                {/* Video tag with standard auto play configuration */}
-                <video
-                  key={`${activeSegment.id}-video`}
-                  className="w-full h-full object-contain"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls={false}
-                  disablePictureInPicture
-                  onLoadedMetadata={(event) => {
-                    const video = event.currentTarget;
-                    if (video.videoWidth && video.videoHeight) {
-                      setVideoAspectRatio(video.videoWidth / video.videoHeight);
-                    }
-                  }}
-                  onError={(e) => {
-                    // Fallback directly on error
-                    console.log('Video error, showing fallback image', e);
-                  }}
-                >
-                  <source src={activeSegment.videoUrl} type={activeSegment.videoType} />
-                  Your browser does not support the video tag.
-                </video>
+                {videoFailed ? (
+                  <img
+                    src={activeSegment.fallbackImageUrl}
+                    alt={activeSegment.title}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <video
+                    key={`${activeSegment.id}-video`}
+                    className="w-full h-full object-contain"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls={false}
+                    disablePictureInPicture
+                    onLoadedMetadata={(event) => {
+                      const video = event.currentTarget;
+                      if (video.videoWidth && video.videoHeight) {
+                        setVideoAspectRatio(video.videoWidth / video.videoHeight);
+                      }
+                    }}
+                    onError={() => {
+                      setVideoFailed(true);
+                      setVideoAspectRatio(16 / 9);
+                    }}
+                  >
+                    <source src={activeSegment.videoUrl} type={activeSegment.videoType} />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
 
               </motion.div>
             </AnimatePresence>

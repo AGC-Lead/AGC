@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, MessageSquare } from 'lucide-react';
+import { BRAND_NAME, HERO_BACKGROUND_IMAGE_URL, HERO_LEFT_IMAGE_URL, HERO_RIGHT_IMAGE_URL } from '../constants/branding';
 
 export default function HeroBanner() {
   const [stage, setStage] = useState<'split' | 'expanded' | 'content'>('split');
@@ -68,7 +69,7 @@ export default function HeroBanner() {
                 </div>
                 <div className="aspect-[4/3] w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative bg-slate-800">
                   <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+                    src={HERO_LEFT_IMAGE_URL}
                     alt="AGC Equipe Planejamento"
                     className="w-full h-full object-cover"
                   />
@@ -106,7 +107,7 @@ export default function HeroBanner() {
               >
                 <div className="aspect-[4/3] w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative bg-slate-850">
                   <img
-                    src="https://images.unsplash.com/photo-1626379616459-b2ce1d9decbc?auto=format&fit=crop&q=80&w=800"
+                    src={HERO_RIGHT_IMAGE_URL}
                     alt="AGC Conteúdo e Gravações"
                     className="w-full h-full object-cover"
                   />
@@ -129,7 +130,7 @@ export default function HeroBanner() {
               >
                 <div>
                   <h1 className="font-display font-black text-xl tracking-widest text-white leading-none">
-                    AGC
+                    {BRAND_NAME}
                   </h1>
                   <span className="font-mono text-[8px] tracking-[0.15em] text-red-500 uppercase block mt-1">PERFORMANCE</span>
                 </div>
@@ -151,7 +152,7 @@ export default function HeroBanner() {
         transition={{ duration: stage === 'split' ? 0 : 1.5 }}
       >
         <motion.img
-          src="https://images.unsplash.com/photo-1626379616459-b2ce1d9decbc?auto=format&fit=crop&q=80&w=1600"
+          src={HERO_BACKGROUND_IMAGE_URL}
           alt="AGC Full Background Scaled"
           className="absolute object-cover w-full h-full object-center"
           animate={{
@@ -188,7 +189,7 @@ export default function HeroBanner() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="font-display font-black text-6xl sm:text-8xl tracking-tighter text-white mb-4"
             >
-              AGC
+              {BRAND_NAME}
             </motion.h2>
 
             {/* Core Value Proposition Statement */}
