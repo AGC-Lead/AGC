@@ -1,43 +1,67 @@
-import { Segment, ProcessPhase, Office, ProofSocial } from '../types';
+﻿import { Segment, ProcessPhase, Office, ProofSocial } from '../types';
 
 export const AGC_SEGMENTS: Segment[] = [
   {
     id: 'imobiliaria',
+    code: 'B1',
     title: 'Imobiliária',
-    description: 'Apresentações cinemáticas de imóveis de luxo e captação qualificada que aceleram a velocidade de vendas.',
-    videoUrl: 'https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c054273b16f906799acaf28e2c01922c&profile_id=165&oauth2_token_id=57447761',
+    description: 'Apresentações cinematográficas de imóveis, tours e bastidores comerciais para gerar desejo e captar leads qualificados.',
+    videoUrl: './videos/wave-imobiliaria.mp4',
+    videoType: 'video/mp4',
+    durationMs: 12000,
     fallbackImageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=1000'
   },
   {
     id: 'construtora',
+    code: 'B2',
     title: 'Construtora',
-    description: 'Posicionamento institucional e lançamentos de alto padrão que esgotam o estoque no final de semana.',
+    description: 'Posicionamento institucional e lançamentos de alto padrão com conteúdo planejado para acelerar interesse, visitas e propostas.',
     videoUrl: 'https://player.vimeo.com/external/494165688.sd.mp4?s=d0a273b4e4e97666249e0839c4e2095cc1a89bb6&profile_id=165&oauth2_token_id=57447761',
+    videoType: 'video/mp4',
+    durationMs: 12000,
     fallbackImageUrl: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=1000'
   },
   {
     id: 'concessionaria',
+    code: 'B3',
     title: 'Concessionária',
-    description: 'Atração massiva de leads querendo avaliar veículos e campanhas de ofertas ultra segmentadas.',
-    videoUrl: 'https://player.vimeo.com/external/403842186.sd.mp4?s=124040a4cd91891bca7f5c5b4d70a969ea5ef35b&profile_id=165&oauth2_token_id=57447761',
+    description: 'Vídeos de oferta, detalhes do veículo e campanhas de financiamento para atrair leads prontos para simulação e avaliação.',
+    videoUrl: './videos/fiat-strada-concessionaria.mp4',
+    videoType: 'video/mp4',
+    durationMs: 12000,
     fallbackImageUrl: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=1000'
   },
   {
     id: 'loja-moto',
+    code: 'B4',
     title: 'Loja de Moto',
-    description: 'Vídeos imersivos de test-drive e funis focados no financiamento rápido direto pelo direct/WhatsApp.',
-    videoUrl: 'https://player.vimeo.com/external/511942045.sd.mp4?s=aefc080db95e69e34ffdcfb5ba284687d6928bad&profile_id=165&oauth2_token_id=57447761',
+    description: 'Conteúdos imersivos de produto, presença e condição comercial para transformar visualização em conversa no WhatsApp.',
+    videoUrl: './videos/black-shineray-loja-moto.mp4',
+    videoType: 'video/mp4',
+    durationMs: 12000,
     fallbackImageUrl: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=1000'
   },
   {
     id: 'autoescola',
+    code: 'B5',
     title: 'Autoescola',
     description: 'Conteúdos focados no sonho da habilitação, contornando objeções e gerando novos alunos todos os dias.',
     videoUrl: 'https://player.vimeo.com/external/435674703.sd.mp4?s=6cb7264a9eecdb3163bcafda017c66d2f3b90ec2&profile_id=165&oauth2_token_id=57447761',
+    videoType: 'video/mp4',
+    durationMs: 12000,
     fallbackImageUrl: 'https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&q=80&w=1000'
+  },
+  {
+    id: 'medica',
+    code: 'B6',
+    title: 'Médica',
+    description: 'Conteúdo humanizado de rotina médica, autoridade clínica e bastidores profissionais para aproximar pacientes e fortalecer reputação.',
+    videoUrl: './videos/dra-micaela-medica.mp4',
+    videoType: 'video/mp4',
+    durationMs: 12000,
+    fallbackImageUrl: 'https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&q=80&w=1000'
   }
 ];
-
 export const AGC_PROCESS: ProcessPhase[] = [
   {
     phase: 1,
@@ -156,3 +180,4 @@ export const AGC_PROOFS: ProofSocial[] = [
     quote: 'O treinamento do time comercial para WhatsApp feito pela AGC transformou nosso atendimento. Conversão subiu de de 8% para 24%!'
   }
 ];
+
