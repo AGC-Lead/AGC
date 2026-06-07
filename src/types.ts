@@ -1,8 +1,11 @@
 export interface Segment {
   id: string;
+  code: string;
   title: string;
   description: string;
   videoUrl: string;
+  videoType: string;
+  durationMs: number;
   fallbackImageUrl: string;
 }
 
