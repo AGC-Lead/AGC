@@ -1,12 +1,13 @@
 import { MessageSquare } from 'lucide-react';
 import { motion } from 'motion/react';
+import { buildWhatsAppUrl } from '../constants/branding';
 
 export default function WhatsAppFloat() {
   return (
     <div className="fixed bottom-6 right-6 z-40">
       <a
         id="float-wa-btn"
-        href="https://wa.me/5571999999999?text=Ol%C3%A1%21%20Gostaria%20de%20um%20diagn%C3%B3stico%20de%20vendas%20gratuito%20pela%20AGC."
+        href={buildWhatsAppUrl('Olá! Gostaria de um diagnóstico de vendas gratuito pela AGC.')}
         target="_blank"
         rel="noreferrer"
         className="relative flex items-center justify-center w-14 h-14 bg-emerald-600 hover:bg-emerald-500 rounded-full text-white shadow-2xl transition-transform hover:scale-110 active:scale-90 group"

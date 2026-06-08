@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, MessageSquare } from 'lucide-react';
-import { BRAND_NAME, HERO_BACKGROUND_IMAGE_URL, HERO_LEFT_IMAGE_URL, HERO_RIGHT_IMAGE_URL } from '../constants/branding';
+import { BRAND_NAME, HERO_BACKGROUND_IMAGE_URL, HERO_LEFT_IMAGE_URL, HERO_RIGHT_IMAGE_URL, buildWhatsAppUrl } from '../constants/branding';
 
 export default function HeroBanner() {
   const [stage, setStage] = useState<'split' | 'expanded' | 'content'>('split');
@@ -230,7 +230,7 @@ export default function HeroBanner() {
 
               <a
                 id="hero-cta-wa"
-                href="https://wa.me/5571999999999?text=Ol%C3%A1%21%20Eu%20estava%20olhando%20o%20site%20da%20AGC%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20de%20vendas%20para%20a%20minha%20empresa%20hoje.%20Podemos%20conversar%3F"
+                href={buildWhatsAppUrl('Olá! Eu estava olhando o site da AGC e gostaria de agendar um diagnóstico de vendas para a minha empresa hoje. Podemos conversar?')}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full sm:w-auto px-8 py-4 bg-[#0a0e1a]/80 backdrop-blur-md text-white border border-white/20 font-display font-bold rounded-xl tracking-wider hover:bg-white/10 transition-all flex items-center justify-center space-x-2"

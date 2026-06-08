@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { MessageSquare, Instagram, Send, CheckCircle2, Landmark, Trophy, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { INSTAGRAM_URL, buildWhatsAppUrl } from '../constants/branding';
 
 export default function ContatoFinal() {
   const [formData, setFormData] = useState({
@@ -49,8 +50,7 @@ export default function ContatoFinal() {
       messageText += `\n*OBSERVAÇÃO:* ${formData.mensagem}`;
     }
 
-    const encodedMessage = encodeURIComponent(messageText);
-    const whatsappLink = `https://wa.me/5571999999999?text=${encodedMessage}`;
+    const whatsappLink = buildWhatsAppUrl(messageText);
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -101,7 +101,7 @@ export default function ContatoFinal() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <a
                 id="contato-wa-direct"
-                href="https://wa.me/5571999999999?text=Ol%C3%A1%21%20Eu%20estava%20olhando%20o%20site%20da%20AGC%20e%20gostaria%20de%20impulsionar%20as%20minhas%20vendas."
+                href={buildWhatsAppUrl('Olá! Eu estava olhando o site da AGC e gostaria de impulsionar as minhas vendas.')}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center space-x-2.5 px-6 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-display font-bold text-xs tracking-wider transition-all"
@@ -112,7 +112,7 @@ export default function ContatoFinal() {
 
               <a
                 id="contato-ig-direct"
-                href="https://instagram.com"
+                href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center space-x-2.5 px-6 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-xl font-display font-bold text-xs tracking-wider transition-all"

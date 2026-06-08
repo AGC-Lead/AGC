@@ -1,9 +1,10 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Video, BarChart2, MessageSquare, TrendingUp, Cpu, Smartphone, DollarSign, Calendar, Compass, ShieldCheck, ChevronDown } from 'lucide-react';
+import { SERVICE_VIDEO_CATEGORY_DATA, VideoCategoryKey } from '../constants/serviceContent';
 
 export default function ServicosMapeamento() {
-  const [activeVideoCategory, setActiveVideoCategory] = useState<'realestate' | 'car' | 'const' | 'motos' | 'school' | 'medica'>('realestate');
+  const [activeVideoCategory, setActiveVideoCategory] = useState<VideoCategoryKey>('realestate');
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
 
   const cronogramaData = [
@@ -17,44 +18,7 @@ export default function ServicosMapeamento() {
   ];
   const duplicatedCronograma = [...cronogramaData, ...cronogramaData, ...cronogramaData];
 
-  const videoCategoryData = {
-    realestate: {
-      title: 'Imobiliária',
-      stats: 'Visualizações: 24.5k • Leads: 18',
-      desc: 'Tour dinâmico em apartamento decorado focado nos atributos do imóvel.',
-      image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=400'
-    },
-    car: {
-      title: 'Concessionária',
-      stats: 'Visualizações: 41.2k • Leads: 32',
-      desc: 'Exposição de aerodinâmica, som do motor e atrativos do financiamento.',
-      image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'
-    },
-    const: {
-      title: 'Construtora',
-      stats: 'Visualizações: 19.8k • Leads: 14',
-      desc: 'Perspectivas 3D intercaladas com andamento físico real da fundação.',
-      image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=400'
-    },
-    motos: {
-      title: 'Loja de Motos',
-      stats: 'Visualizações: 52.0k • Leads: 45',
-      desc: 'Câmera em primeira pessoa acelerando o modelo premium com preço em tela.',
-      image: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=400'
-    },
-    school: {
-      title: 'Autoescola',
-      stats: 'Visualizações: 33.4k • Leads: 29',
-      desc: 'Tutorial rápido eliminando o receio da baliza e promovendo carteira ágil.',
-      image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=400'
-    },
-    medica: {
-      title: 'Médica',
-      stats: 'Visualizações: 28.7k - Agendamentos: 21',
-      desc: 'Rotina profissional, bastidores e autoridade clínica apresentados com linguagem humanizada.',
-      image: 'https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&q=80&w=400'
-    }
-  };
+  const videoCategoryData = SERVICE_VIDEO_CATEGORY_DATA;
 
   return (
     <section id="servicos" className="py-24 bg-slate-50 relative overflow-hidden">
@@ -117,7 +81,7 @@ export default function ServicosMapeamento() {
                     {Object.entries(videoCategoryData).map(([key, value]) => (
                       <button
                         key={key}
-                        onClick={() => setActiveVideoCategory(key as any)}
+                        onClick={() => setActiveVideoCategory(key as VideoCategoryKey)}
                         className={`px-4 py-2.5 rounded-xl text-xs font-medium transition-all ${
                           activeVideoCategory === key
                             ? 'bg-red-600 text-white shadow-md'
@@ -377,3 +341,4 @@ export default function ServicosMapeamento() {
     </section>
   );
 }
+

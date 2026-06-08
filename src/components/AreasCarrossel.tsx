@@ -5,7 +5,6 @@ import { AGC_SEGMENTS } from '../constants/data';
 
 export default function AreasCarrossel() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [videoAspectRatio, setVideoAspectRatio] = useState(16 / 9);
   const [videoFailed, setVideoFailed] = useState(false);
   const autoref = useRef<NodeJS.Timeout | null>(null);
 
@@ -131,8 +130,7 @@ export default function AreasCarrossel() {
 
           {/* Right panel: High Quality HTML5 Video Container */}
           <div
-            className="lg:col-span-7 relative w-full rounded-3xl overflow-hidden border border-white/10 group bg-slate-950 self-center"
-            style={{ aspectRatio: videoAspectRatio }}
+            className="lg:col-span-7 relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] mx-auto aspect-[9/16] rounded-3xl overflow-hidden border border-white/10 group bg-slate-950 self-center shadow-2xl"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -149,27 +147,28 @@ export default function AreasCarrossel() {
                   <img
                     src={activeSegment.fallbackImageUrl}
                     alt={activeSegment.title}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <video
                     key={`${activeSegment.id}-video`}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     autoPlay
                     loop
-                    muted
                     playsInline
                     controls={false}
                     disablePictureInPicture
+                    preload="auto"
                     onLoadedMetadata={(event) => {
                       const video = event.currentTarget;
-                      if (video.videoWidth && video.videoHeight) {
-                        setVideoAspectRatio(video.videoWidth / video.videoHeight);
-                      }
+                      video.muted = false;
+                      video.volume = 1;
+                    }}
+                    onCanPlay={(event) => {
+                      event.currentTarget.play().catch(() => undefined);
                     }}
                     onError={() => {
                       setVideoFailed(true);
-                      setVideoAspectRatio(16 / 9);
                     }}
                   >
                     <source src={activeSegment.videoUrl} type={activeSegment.videoType} />

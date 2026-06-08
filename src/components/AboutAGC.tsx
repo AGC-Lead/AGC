@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { Video, BarChart3, MessageSquareText, GitMerge, GraduationCap, Share2 } from 'lucide-react';
 
 export default function AboutAGC() {
@@ -57,7 +57,7 @@ export default function AboutAGC() {
             <div className="w-20 h-1 bg-red-600 rounded-full" />
             
             <p className="text-lg text-slate-600 font-sans leading-relaxed">
-              Agências tradicionais entregam posts e curtidas. A AGC constrói uma <strong className="text-slate-900 font-medium">máquina de vendas 360°</strong> integrada.
+              Agências tradicionais entregam posts e curtidas. A AGC PRIME constrói uma <strong className="text-slate-900 font-medium">máquina de vendas 360°</strong> integrada.
             </p>
             
             <p className="text-slate-500 leading-relaxed text-sm">
@@ -107,3 +107,4 @@ export default function AboutAGC() {
     </section>
   );
 }
+
