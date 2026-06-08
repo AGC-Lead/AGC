@@ -1,4 +1,9 @@
 export const BRAND_NAME = 'AGC';
+export const WHATSAPP_NUMBER = '558193034159';
+export const INSTAGRAM_URL = 'https://www.instagram.com/agcprime360?igsh=MTdkZzA5bzI4eHZqeA==';
+
+export const buildWhatsAppUrl = (message: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
 // Banner inicial: troque estas URLs pelas suas duas imagens principais.
 export const HERO_LEFT_IMAGE_URL =
